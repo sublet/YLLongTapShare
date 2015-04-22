@@ -66,10 +66,24 @@
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
+    NSLog(@"touchesEnded");
+    
+    NSLog(@"Selected: %@", [_shareView getSelected]);
+    
+    YLShareItem *item = [_shareView getSelected];
+    
+    __weak YLLongTapShareView* weakSelf = self;
+    [shareView showShareViewInView:self at:touchPoint withCompletion:^(NSUInteger index, YLShareItem *item) {
+        if ([weakSelf.delegate respondsToSelector:@selector(longTapShareView:didSelectShareTo:withIndex:)]) {
+            [weakSelf.delegate longTapShareView:weakSelf didSelectShareTo:item withIndex:index];
+        }
+    }];
+    
     [_shareView dismissShareView];
     _shareView = nil;
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"touchesCancelled");
     [super touchesCancelled:touches withEvent:event];
 }
 

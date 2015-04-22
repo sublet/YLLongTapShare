@@ -180,8 +180,8 @@
     
     
     CAAnimation* disappear2 = [YLShareAnimationHelper scaleAnimationFrom:0.01 to:1.0
-                                                                    withDuration:0.8 andDelay:(scaleTime+disappTime)
-                                                               andTimingFunction:nil andIsSpring:YES];
+                                                            withDuration:0.8 andDelay:(scaleTime+disappTime)
+                                                       andTimingFunction:nil andIsSpring:YES];
     
     CAAnimation* showOpacity = [YLShareAnimationHelper opacityAnimationFrom:1 to:1
                                                                withDuration:0.8 andDelay:(scaleTime+disappTime)
@@ -298,19 +298,24 @@
 }
 
 - (void)doneSelected {
-    _isDone = YES;
-    NSUInteger i = [_shareBtns indexOfObject:_selectedView];
-    __weak typeof(self) weakSelf = self;
-    __weak typeof(_shareItems) weakShareItems = _shareItems;
-    [_selectedView animateToDoneWithHandler:^{
-        if (weakSelf.completionHandler) {
-            weakSelf.completionHandler(i, weakShareItems[i]);
-            weakSelf.completionHandler = nil;
-        }
-        [weakSelf dismissShareView];
-    }];
+    //_isDone = YES;
+    /*NSUInteger i = [_shareBtns indexOfObject:_selectedView];
+     __weak typeof(self) weakSelf = self;
+     __weak typeof(_shareItems) weakShareItems = _shareItems;
+     [_selectedView animateToDoneWithHandler:^{
+     if (weakSelf.completionHandler) {
+     weakSelf.completionHandler(i, weakShareItems[i]);
+     weakSelf.completionHandler = nil;
+     }
+     [weakSelf dismissShareView];
+     }];*/
     [_selectTimer invalidate];
     _selectTimer = nil;
+}
+
+- (YLShareItem *)getSelected {
+    NSUInteger i = [_shareBtns indexOfObject:_selectedView];
+    return (YLShareItem *)_shareItems[i];
 }
 
 @end

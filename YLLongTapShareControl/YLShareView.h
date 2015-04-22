@@ -38,6 +38,7 @@ typedef void (^SelectedHandler)(NSUInteger index, YLShareItem* item);
  *  point should be in the coordinate of current view
  */
 - (void)slideTo:(CGPoint)point;
+- (YLShareItem *)getSelected;
 
 @end
 
