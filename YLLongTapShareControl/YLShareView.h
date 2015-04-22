@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum YLShareViewOpenAction {
+    YLShareViewOpenActionDefault,
+    YLShareViewOpenActionTouchEnd
+} YLShareViewOpenAction;
+
 typedef NS_ENUM(NSUInteger, YLShareViewState) {
     YLShareViewUnopen = 0,
     YLShareViewOpened,
@@ -28,6 +33,7 @@ typedef void (^SelectedHandler)(NSUInteger index, YLShareItem* item);
 
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, assign, readonly) YLShareViewState state;
+@property (nonatomic, assign) YLShareViewOpenAction openActionType;
 
 - (id)initWithShareItems:(NSArray*)shareItems;
 

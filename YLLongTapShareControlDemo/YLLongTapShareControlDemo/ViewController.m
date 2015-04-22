@@ -23,6 +23,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     if ([self.view isKindOfClass:[YLLongTapShareView class]]) {
         ((YLLongTapShareView*)self.view).delegate = self;
+        [(YLLongTapShareView*)self.view updateOpenType:YLShareViewOpenActionTouchEnd];
         [(YLLongTapShareView*)self.view addShareItem:[YLShareItem itemWithIcon:[UIImage imageNamed:@"facebook"] andTitle:@"Facebook"]];
         [(YLLongTapShareView*)self.view addShareItem:[YLShareItem itemWithIcon:[UIImage imageNamed:@"instagram"] andTitle:@"Instagram"]];
         [(YLLongTapShareView*)self.view addShareItem:[YLShareItem itemWithIcon:[UIImage imageNamed:@"pinterest"] andTitle:@"Pinterest"]];
@@ -46,7 +47,7 @@
 }
 
 - (void)longTapShareView:(UIView*)view didSelectShareTo:(YLShareItem*)item withIndex:(NSUInteger)index {
-    NSLog(@"Triggered");
+    NSLog(@"Triggered: %@", item.title);
 }
 
 @end

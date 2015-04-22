@@ -46,6 +46,8 @@
     CAShapeLayer*       _btnLayer;
 }
 
+@synthesize openActionType = _openActionType;
+
 - (id)initWithShareItems:(NSArray*)shareItems {
     self = [self initWithFrame:CGRectMake(0, 0, 60, 60)];
     if (self) {
@@ -271,7 +273,9 @@
                 _selectedView = selectedView;
                 [_selectedView selectAnimation];
                 [_selectTimer invalidate];
-                _selectTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(doneSelected) userInfo:nil repeats:NO];
+                if (_openActionType == YLShareViewOpenActionDefault) {
+                    _selectTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(doneSelected) userInfo:nil repeats:NO];
+                }
             }
         } else {
             [_selectedView resetAnimation];
@@ -299,23 +303,26 @@
 
 - (void)doneSelected {
     //_isDone = YES;
-    /*NSUInteger i = [_shareBtns indexOfObject:_selectedView];
-     __weak typeof(self) weakSelf = self;
-     __weak typeof(_shareItems) weakShareItems = _shareItems;
-     [_selectedView animateToDoneWithHandler:^{
-     if (weakSelf.completionHandler) {
-     weakSelf.completionHandler(i, weakShareItems[i]);
-     weakSelf.completionHandler = nil;
-     }
-     [weakSelf dismissShareView];
-     }];*/
+    NSUInteger i = [_shareBtns indexOfObject:_selectedView];
+    __weak typeof(self) weakSelf = self;
+    __weak typeof(_shareItems) weakShareItems = _shareItems;
+    [_selectedView animateToDoneWithHandler:^{
+        if (weakSelf.completionHandler) {
+            weakSelf.completionHandler(i, weakShareItems[i]);
+            weakSelf.completionHandler = nil;
+        }
+        [weakSelf dismissShareView];
+    }];
     [_selectTimer invalidate];
     _selectTimer = nil;
 }
 
 - (YLShareItem *)getSelected {
-    NSUInteger i = [_shareBtns indexOfObject:_selectedView];
-    return (YLShareItem *)_shareItems[i];
+    if (_selectedView != nil) {
+        NSUInteger i = [_shareBtns indexOfObject:_selectedView];
+        return (YLShareItem *)_shareItems[i];
+    }
+    return nil;
 }
 
 @end

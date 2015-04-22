@@ -12,6 +12,7 @@
 @interface YLLongTapShareView ()
 
 @property (nonatomic, strong, readonly) NSMutableArray *shareItems;
+@property (nonatomic, assign) YLShareViewOpenAction openType;
 
 @end
 
@@ -41,6 +42,7 @@
             CGPoint touchPoint = [touch locationInView:self];
             
             YLShareView* shareView = [[YLShareView alloc] initWithShareItems:self.shareItems];
+            shareView.openActionType = _openType;
             if ([self.delegate respondsToSelector:@selector(colorOfShareView)]) {
                 shareView.tintColor = [self.delegate colorOfShareView];
             }
@@ -66,26 +68,25 @@
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesEnded:touches withEvent:event];
-    NSLog(@"touchesEnded");
     
-    NSLog(@"Selected: %@", [_shareView getSelected]);
-    
-    YLShareItem *item = [_shareView getSelected];
-    
-    __weak YLLongTapShareView* weakSelf = self;
-    [shareView showShareViewInView:self at:touchPoint withCompletion:^(NSUInteger index, YLShareItem *item) {
-        if ([weakSelf.delegate respondsToSelector:@selector(longTapShareView:didSelectShareTo:withIndex:)]) {
-            [weakSelf.delegate longTapShareView:weakSelf didSelectShareTo:item withIndex:index];
+    if (_openType == YLShareViewOpenActionTouchEnd) {
+        YLShareItem *item = [_shareView getSelected];
+        if (item != nil) {
+            if ([self.delegate respondsToSelector:@selector(longTapShareView:didSelectShareTo:withIndex:)]) {
+                [self.delegate longTapShareView:self didSelectShareTo:item withIndex:0];
+            }
         }
-    }];
+    }
     
     [_shareView dismissShareView];
     _shareView = nil;
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    NSLog(@"touchesCancelled");
     [super touchesCancelled:touches withEvent:event];
 }
 
+- (void)updateOpenType:(YLShareViewOpenAction)type {
+    _openType = type;
+}
 
 @end

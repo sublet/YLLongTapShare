@@ -14,6 +14,7 @@
 @property (nonatomic, weak) id<YLLongTapShareDelegate> delegate;
 
 - (void)addShareItem:(YLShareItem*)item;
+- (void)updateOpenType:(YLShareViewOpenAction)type;
 
 @end
 

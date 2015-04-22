@@ -12,6 +12,8 @@
 	<dict>
 		<key>1F5ABDEB61960DEBBE860B565F121BD9CA6CD818</key>
 		<string>github.com:sublet/YLLongTapShare.git</string>
+		<key>A8AC87DB6E6A51E79081FD41784E88C74CF6BCE1</key>
+		<string>https://github.com/fbsamples/ios-howtos.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>YLLongTapShareControlDemo/YLLongTapShareControlDemo.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>1F5ABDEB61960DEBBE860B565F121BD9CA6CD818</key>
 		<string>../../..</string>
+		<key>A8AC87DB6E6A51E79081FD41784E88C74CF6BCE1</key>
+		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>github.com:sublet/YLLongTapShare.git</string>
@@ -28,6 +32,14 @@
 	<string>1F5ABDEB61960DEBBE860B565F121BD9CA6CD818</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A8AC87DB6E6A51E79081FD41784E88C74CF6BCE1</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
